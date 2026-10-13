@@ -33,7 +33,7 @@ input:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--gold);o
 
 /* ===== หน้าผลลัพธ์ (แบบเรียบ พื้นขาว) ===== */
 #result{
-  background-image: url(resultbackground.jpeg);
+  background-image: url(resultbackground.jpg);
   background-size: cover;
   background-position: center;
   color: #9a4c32;
@@ -47,16 +47,22 @@ input:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--gold);o
   font-weight:700;
   min-width: 5em;
   line-height:1.25}
+  text-align: center;
 .who{margin:2% 0 4%;
   font-size: clamp(.9rem, .5rem + 2vw, 1.25rem);
   font-weight:400;
   text-align: center;}
 .round{margin-bottom: 3%;
-font-size: clamp(.85rem, .5rem + 1.8vw, 1.15rem);}
-.round h2{margin:0 0 1%;
+  margin-left: 100px;
+  font-size: clamp(.85rem, .5rem + 1.8vw, 1.15rem);}
+.round h2{margin-top:0;
+          margin-left: 100px;
+          margin-bottom: 1%;
   font-size:1.15rem;
   font-weight:600;}
-.round p{margin:0; }
+.round p{margin-top:0;
+          margin-left: 100px;
+          margin-bottom: 1%; }
 .none{color:#888; }
 </style>
 </head>
