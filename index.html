@@ -45,15 +45,16 @@ input:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--gold);o
   margin:0 auto;
   padding:calc(var(--w)*.38) calc(var(--w)*.1) 0;
   background: url(resultbackground.jpg) center/100% 100% no-repeat;
+  text-align: center;
 }
 .status{
   margin: 0 0 calc(var(--w)*.02) ;
   font-size: calc(var(--w)*.045);
   font-weight:700;
-  min-width: 5em;
   line-height:1.25;
-}
   text-align: center;
+}
+  
 .who{
   margin: 0 0 calc(var(--w)*.03)
   font-size: calc(var(--w)*.036);
@@ -61,21 +62,29 @@ input:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--gold);o
   line-height:1.5;
   text-align: center;
 }
-.round{
-  margin: 0 0 calc(var(--w)*.02);
-  padding-left:calc(var(--w)*.12)
-  font-size: calc(var(--w)*.036);
-}
-.round h2{
-  margin: 0 0 calc(var(--w)*.008)
-  font-size: calc(var(--w)*.04);
+  
+h2{
+  margin:calc(var(--w)*.02) 0 0;
+  font-size:calc(var(--w)*.04);
   font-weight:600;
 }
-.round p{
-  margin: 0 ;
-  line-height: 1.4;
+  
+.score{
+  width:100%;
+  border-collapse:collapse;
+  font-size:calc(var(--w)*.034);
 }
-.none{color:#888; }
+  
+.score th,
+.score td{
+  padding:calc(var(--w)*.008) calc(var(--w)*.015);
+  border-bottom:1px solid rgba(154,76,50,.45);
+  text-align:center;
+}
+  
+.score th{font-weight:600;border-bottom:2px solid #9a4c32}
+.score tfoot td{font-weight:700;border-top:2px solid #9a4c32;border-bottom:0}
+.none{color:#888}
 </style>
 </head>
 <body class="intro">
@@ -128,11 +137,11 @@ const COL = {
         { name: "ชีวะ",    score: "Score R3 bio",  pct: "Percentile R3 bio"  },
         { name: "ฟิสิกส์", score: "Score R3 phy",  pct: "Percentile R3 phy"  }
       ],
-      total: { score: "Score R3", pct: "Percentile R3" } }
+      total: { score: "Score R3", pct: "Percentile R3" } } ,
      { title: "Lab",
       subjects: [
         { name: "Lab 1",    score: "Score Lab 1", pct: "Percentile Lab 1" },
-        { name: "Lab 2",    score: "Score Lab 2",  pct: "Percentile Lab 2"  }}
+        { name: "Lab 2",    score: "Score Lab 2",  pct: "Percentile Lab 2"  ]}
   ]
 };
 // ====================================
@@ -210,6 +219,36 @@ function check(){
   if (!p) { err.textContent = "ไม่พบข้อมูล"; return; }
   render(p);
 }
+  
+function cell(row, key) {
+  const v = row[key];
+  if (!has(v)) return '<span class="none">ไม่พบข้อมูล</span>';
+  const n = Number(v);
+  return esc(String(isNaN(n) ? v : Math.round(n * 100) / 100));
+}
+
+function roundsToShow(row) {
+  const s = (row[COL.status] ?? "").toString()
+    .replace(/[๐-๙]/g, d => "๐๑๒๓๔๕๖๗๘๙".indexOf(d));
+  const m = s.match(/\d+/);
+  return m ? Number(m[0]) : 1;
+}
+
+function renderRounds(row) {
+  const n = roundsToShow(row);
+  const list = COL.rounds.filter((r, i) =>
+    r.optional ? r.subjects.some(s => has(row[s.score])) : i < n);
+  $("rounds").innerHTML = list.map(r => `
+    <h2>${r.title}</h2>
+    <table class="score">
+      <thead><tr><th>วิชา</th><th>คะแนน</th><th>เปอร์เซนไทล์</th></tr></thead>
+      <tbody>
+        ${r.subjects.map(s => `
+          <tr><td>${s.name}</td><td>${cell(row, s.score)}</td><td>${cell(row, s.pct)}</td></tr>`).join("")}
+      </tbody>
+      ${r.total ? `<tfoot><tr><td>รวม</td><td>${cell(row, r.total.score)}</td><td>${cell(row, r.total.pct)}</td></tr></tfoot>` : ""}
+    </table>`).join("");
+}
 
 function render(p){
   const st = p[COL.status], v = norm(st);
@@ -218,9 +257,7 @@ function render(p){
   $("status").textContent = has(st) ? st : "ไม่พบข้อมูล";
   $("who").innerHTML = "ชื่อ: " + esc(p[COL.user]) + "<br>รหัส: " + esc(p[COL.id]);
   const val = x => has(x) ? esc(x) : `<span class="none">ไม่พบข้อมูล</span>`;
-  $("rounds").innerHTML = COL.rounds.map((r, i) =>
-    `<div class="round"><h2>รอบ ${i + 1}</h2><p>คะแนน: ${val(p[r.score])}</p><p>เปอร์เซนไทล์: ${val(p[r.pct])}</p></div>`
-  ).join("");
+  renderRounds(p);
   show("result");
 }
 
