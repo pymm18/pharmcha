@@ -36,7 +36,7 @@ input:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--gold);o
   --w:min(92vw,560px);
   background: #2a211a;
   color: #9a4c32;
-  min-height:100vh
+  min-height:100vh;
   padding:16px 0;
 }
 #result main{
@@ -56,10 +56,10 @@ input:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--gold);o
 }
   
 .who{
-  margin: 0 0 calc(var(--w)*.03)
+  margin: 0 0 calc(var(--w)*.03);
   font-size: calc(var(--w)*.036);
-  font-weight:400;
-  line-height:1.5;
+  font-weight: 400;
+  line-height: 1.5;
   text-align: center;
 }
   
@@ -115,35 +115,47 @@ h2{
 const CSV_URL         = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQTSaIGDWW3Stb2DZE3hglnlQbXkySn74oEOPmXO68fXHugGsVutg9ckJfHUrKWfpYXEhK1Ht8DCBAZ/pubhtml?gid=505430599&single=true";
 
 const COL = {
-  id: "Code", user: "Name", status: "Status",
+  id: "Code",
+  user: "Name",
+  status: "Status",
   rounds: [
-    { title: "รอบ 1",
+    {
+      title: "รอบ 1",
       subjects: [
-        { name: "เคมี",    score: "Score R1 chem", pct: "Percentile R1 chem" },
-        { name: "ชีวะ",    score: "Score R1 bio",  pct: "Percentile R1 bio"  },
-        { name: "ฟิสิกส์", score: "Score R1 phy",  pct: "Percentile R1 phy"  }
+        { name: "เคมี", score: "Score R1 chem", pct: "Percentile R1 chem" },
+        { name: "ชีวะ", score: "Score R1 bio", pct: "Percentile R1 bio" },
+        { name: "ฟิสิกส์", score: "Score R1 phy", pct: "Percentile R1 phy" }
       ],
-      total: { score: "Score R1", pct: "Percentile R1" } },
-    { title: "รอบ 2",
+      total: { score: "Score R1", pct: "Percentile R1" }
+    },
+    {
+      title: "รอบ 2",
       subjects: [
-        { name: "เคมี",    score: "Score R2 chem", pct: "Percentile R2 chem" },
-        { name: "ชีวะ",    score: "Score R2 bio",  pct: "Percentile R2 bio"  },
-        { name: "ฟิสิกส์", score: "Score R2 phy",  pct: "Percentile R2 phy"  }
+        { name: "เคมี", score: "Score R2 chem", pct: "Percentile R2 chem" },
+        { name: "ชีวะ", score: "Score R2 bio", pct: "Percentile R2 bio" },
+        { name: "ฟิสิกส์", score: "Score R2 phy", pct: "Percentile R2 phy" }
       ],
-      total: { score: "Score R2", pct: "Percentile R2" } } ,
-     { title: "รอบ 3",
+      total: { score: "Score R2", pct: "Percentile R2" }
+    },
+    {
+      title: "รอบ 3",
       subjects: [
-        { name: "เคมี",    score: "Score R3 chem", pct: "Percentile R3 chem" },
-        { name: "ชีวะ",    score: "Score R3 bio",  pct: "Percentile R3 bio"  },
-        { name: "ฟิสิกส์", score: "Score R3 phy",  pct: "Percentile R3 phy"  }
+        { name: "เคมี", score: "Score R3 chem", pct: "Percentile R3 chem" },
+        { name: "ชีวะ", score: "Score R3 bio", pct: "Percentile R3 bio" },
+        { name: "ฟิสิกส์", score: "Score R3 phy", pct: "Percentile R3 phy" }
       ],
-      total: { score: "Score R3", pct: "Percentile R3" } } ,
-     { title: "Lab",
+      total: { score: "Score R3", pct: "Percentile R3" }
+    },
+    {
+      title: "Lab",
       subjects: [
-        { name: "Lab 1",    score: "Score Lab 1", pct: "Percentile Lab 1" },
-        { name: "Lab 2",    score: "Score Lab 2",  pct: "Percentile Lab 2" }
+        { name: "Lab 1", score: "Score Lab 1", pct: "Percentile Lab 1" },
+        { name: "Lab 2", score: "Score Lab 2", pct: "Percentile Lab 2" }
+      ]
+    }
   ]
 };
+ 
 // ====================================
 
 const $ = id => document.getElementById(id);
