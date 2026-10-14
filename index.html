@@ -211,43 +211,16 @@ function check(){
   render(p);
 }
 
-function cell(row, key) {
-  const v = row[key];
-  if (!has(v)) return '<span class="none">ไม่พบข้อมูล</span>';
-  const n = Number(v);
-  return esc(String(isNaN(n) ? v : Math.round(n * 100) / 100));
-}
-  
-function roundsToShow(row) {
-  const s = (row[COL.status] ?? "").toString() ;
-  const m = s.match(/\d+/);
-  return m ? Number(m[0]) : 1;
-}
-
-function renderRounds(row) {
-  const n = roundsToShow(row);
-  document.getElementById("rounds").innerHTML = COL.rounds.slice(0, n).map(r => `
-    <h2>${r.title}</h2>
-    <table class="score">
-      <thead><tr><th>วิชา</th><th>คะแนน</th><th>เปอร์เซนไทล์</th></tr></thead>
-      <tbody>
-        ${r.subjects.map(s => `
-          <tr><td>${s.name}</td><td>${cell(row, s.score)}</td><td>${cell(row, s.pct)}</td></tr>`
-        ).join("")}
-      </tbody>
-      <tfoot>
-        <tr><td>รวม</td><td>${cell(row, r.total.score)}</td><td>${cell(row, r.total.pct)}</td></tr>
-      </tfoot>
-    </table>`).join("");
-}
-  
 function render(p){
   const st = p[COL.status], v = norm(st);
   const cls = !has(st) ? "wait" : v.includes("ไม่") ? "fail" : (v.includes("ผ่าน") || v.includes("อันดับ")) ? "pass" : "wait";
   $("status").className = "status " + cls;
   $("status").textContent = has(st) ? st : "ไม่พบข้อมูล";
   $("who").innerHTML = "ชื่อ: " + esc(p[COL.user]) + "<br>รหัส: " + esc(p[COL.id]);
-  renderRounds(p);
+  const val = x => has(x) ? esc(x) : `<span class="none">ไม่พบข้อมูล</span>`;
+  $("rounds").innerHTML = COL.rounds.map((r, i) =>
+    `<div class="round"><h2>รอบ ${i + 1}</h2><p>คะแนน: ${val(p[r.score])}</p><p>เปอร์เซนไทล์: ${val(p[r.pct])}</p></div>`
+  ).join("");
   show("result");
 }
 
