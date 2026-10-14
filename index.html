@@ -106,11 +106,33 @@ input:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--gold);o
 const CSV_URL         = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQTSaIGDWW3Stb2DZE3hglnlQbXkySn74oEOPmXO68fXHugGsVutg9ckJfHUrKWfpYXEhK1Ht8DCBAZ/pub?gid=0&single=true&output=csv";
 
 const COL = {
-  id: "รหัสประจำตัว", user: "ชื่อผู้ใช้", status: "สถานะ",
+  id: "Code", user: "Name", status: "Status",
   rounds: [
-    { score: "คะแนนรอบ1 (30)", pct: "เปอร์เซนไทล์รอบ1" },
-    { score: "คะแนนรอบ2",      pct: "เปอร์เซนไทล์รอบ2" },
-    { score: "คะแนนรอบ3",      pct: "เปอร์เซนไทล์รอบ3" }
+    { title: "รอบ 1",
+      subjects: [
+        { name: "เคมี",    score: "Score R1 chem", pct: "Percentile R1 chem" },
+        { name: "ชีวะ",    score: "Score R1 bio",  pct: "Percentile R1 bio"  },
+        { name: "ฟิสิกส์", score: "Score R1 phy",  pct: "Percentile R1 phy"  }
+      ],
+      total: { score: "Score R1", pct: "Percentile R1" } },
+    { title: "รอบ 2",
+      subjects: [
+        { name: "เคมี",    score: "Score R2 chem", pct: "Percentile R2 chem" },
+        { name: "ชีวะ",    score: "Score R2 bio",  pct: "Percentile R2 bio"  },
+        { name: "ฟิสิกส์", score: "Score R2 phy",  pct: "Percentile R2 phy"  }
+      ],
+      total: { score: "Score R2", pct: "Percentile R2" } } ,
+     { title: "รอบ 3",
+      subjects: [
+        { name: "เคมี",    score: "Score R3 chem", pct: "Percentile R3 chem" },
+        { name: "ชีวะ",    score: "Score R3 bio",  pct: "Percentile R3 bio"  },
+        { name: "ฟิสิกส์", score: "Score R3 phy",  pct: "Percentile R3 phy"  }
+      ],
+      total: { score: "Score R3", pct: "Percentile R3" } }
+     { title: "Lab",
+      subjects: [
+        { name: "Lab 1",    score: "Score Lab 1", pct: "Percentile Lab 1" },
+        { name: "Lab 2",    score: "Score Lab 2",  pct: "Percentile Lab 2"  }}
   ]
 };
 // ====================================
