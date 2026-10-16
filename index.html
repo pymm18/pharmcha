@@ -84,7 +84,6 @@ h2{
   width: 28%
 }
 
-  #chart-r1 { position: relative; z-index: 999; background: #fff; }
 
 .score th{font-weight:600;border-bottom:2px solid #9a4c32}
 .score tfoot td{font-weight:700;border-top:2px solid #9a4c32;border-bottom:0}
@@ -291,7 +290,7 @@ function render(p){
                 { data: [score, total - score], backgroundColor: ['#4a7c59', '#a33b3b'] } ] },
     options: { plugins: { legend: { position: 'bottom' } } } });
   }
-    drawPie('chart-r1', p);
+    drawPie('chart-r1', Number(p[COL.total.score]));
 }
 
 </script>
