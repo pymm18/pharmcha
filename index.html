@@ -285,7 +285,6 @@ function render(p){
   {   const ctx = document.getElementById(id);
    if (!ctx) return;
    if (ctx._chart) ctx._chart.destroy();
-   console.log('score =', score, 'total =', total, 'wrong =', total - score);
    ctx._chart = new Chart(ctx,
      { type: 'pie',
       data: { labels: ['ข้อถูก', 'ข้อผิด'],
