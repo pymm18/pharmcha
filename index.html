@@ -281,9 +281,11 @@ function render(p){
   renderRounds(p);
   show("result");
 
-  const ctx = document.getElementById('chart-r1');
   function drawPie(id, score, total = 30) 
-  { new Chart(ctx, 
+  {   const ctx = document.getElementById(id);
+   if (!ctx) return;
+   if (ctx._chart) ctx._chart.destroy();
+   ctx._chart = new Chart(ctx,
      { type: 'pie',
       data: { labels: ['ข้อถูก', 'ข้อผิด'],
               datasets: [ 
