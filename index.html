@@ -110,9 +110,6 @@ h2{
     <div id="rounds"></div>
     <div style="max-width:260px;margin:auto">
       <canvas id="chart-r1"></canvas>
-      <canvas id="chart-r2"></canvas>
-      <canvas id="chart-r3"></canvas>
-      <canvas id="chart-lab"></canvas>
     </div>
 
   </main>
@@ -291,7 +288,7 @@ function render(p){
                 { data: [score, total - score], backgroundColor: ['#4a7c59', '#a33b3b'] } ] },
     options: { plugins: { legend: { position: 'bottom' } } } });
   }
-    drawPie('chart-r1', 24 );
+    drawPie('chart-r1', ScoreR1 );
 }
 
 </script>
