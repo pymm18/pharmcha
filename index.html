@@ -108,7 +108,7 @@ h2{
     <div id="status" class="status"></div>
     <p id="who" class="who"></p>
     <div id="rounds"></div>
-    <div style="max-width:260px;margin:auto">
+    <div style="max-width:260px;margin:auto;">
       <canvas id="chart-r1"></canvas>
     </div>
 
@@ -163,7 +163,7 @@ const COL = {
     }
   ]
 }
- 
+  
 // ====================================
 
 const $ = id => document.getElementById(id);
@@ -280,15 +280,16 @@ function render(p){
   renderRounds(p);
   show("result");
 
+  const ctx = document.getElementById('chart-r1');
   function drawPie(id, score, total = 30) 
-  { new Chart(document.getElementById(id), 
+  { new Chart(ctx, 
      { type: 'pie',
       data: { labels: ['ข้อถูก', 'ข้อผิด'],
               datasets: [ 
                 { data: [score, total - score], backgroundColor: ['#4a7c59', '#a33b3b'] } ] },
     options: { plugins: { legend: { position: 'bottom' } } } });
   }
-    drawPie('chart-r1', ScoreR1 );
+    drawPie('chart-r1', scoreR1);
 }
 
 </script>
