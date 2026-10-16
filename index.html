@@ -287,7 +287,7 @@ function render(p){
   renderRounds(p);
   show("result");
 
-  function drawPie(id, score, total = 120) 
+  function drawPie(id, score, total = 30) 
   { new Chart(document.getElementById(id), 
      { type: 'doughnut',
       data: { labels: ['ข้อถูก', 'ข้อผิด'],
