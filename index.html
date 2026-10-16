@@ -40,9 +40,9 @@ input:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--gold);o
   padding:16px 0;
 }
 #result main{
-  width: 100%;
+  width: 60cqw;
   margin: 0 auto;
-  padding: calc(var(--w)*.38) calc(var(--w)*.1) 0;
+  padding: 38cqw 0 0;
   background: url(resultbg.png) center / cover no-repeat fixed;
   position: relative;
   text-align: center;
@@ -70,10 +70,11 @@ h2{
 }
   
 .score{
-  width:80%;
+  width:100%;
   margin:0 auto
-  border-collapse:collapse;
+  border-collapse: collapse;
   font-size:calc(var(--w)*.034);
+  table-layout:fixed;
 }
   
 .score th,
@@ -81,6 +82,7 @@ h2{
   padding:calc(var(--w)*.008) calc(var(--w)*.015);
   border-bottom:1px solid rgba(154,76,50,.45);
   text-align:center;
+  width: 28%
 }
   
 .score th{font-weight:600;border-bottom:2px solid #9a4c32}
