@@ -282,7 +282,7 @@ function render(p){
   show("result");
 
   function drawPie(id, score, total = 30) 
-  {   const ctx = document.getElementById(id);
+  { const ctx = document.getElementById(id);
    if (!ctx) return;
    if (ctx._chart) ctx._chart.destroy();
    ctx._chart = new Chart(ctx,
