@@ -106,10 +106,25 @@ h2{
     <div id="status" class="status"></div>
     <p id="who" class="who"></p>
     <div id="rounds"></div>
+    <div style="max-width:260px;margin:auto">
+      <canvas id="chart-r1"></canvas>
+    </div>
+    <div style="max-width:260px;margin:auto">
+      <canvas id="chart-r2"></canvas>
+    </div>
+    <div style="max-width:260px;margin:auto">
+      <canvas id="chart-r3"></canvas>
+    </div>
+    <div style="max-width:260px;margin:auto">
+      <canvas id="chart-lab"></canvas>
+    </div>
+
   </main>
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
 <script>
 // ===== ตั้งค่า (แก้เฉพาะส่วนนี้) =====
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQTSaIGDWW3Stb2DZE3hglnlQbXkySn74oEOPmXO68fXHugGsVutg9ckJfHUrKWfpYXEhK1Ht8DCBAZ/pub?gid=505430599&single=true&output=csv";
@@ -271,6 +286,16 @@ function render(p){
   const val = x => has(x) ? esc(x) : `<span class="none">ไม่พบข้อมูล</span>`;
   renderRounds(p);
   show("result");
+
+  function drawPie(id, score, total = 120) 
+  { new Chart(document.getElementById(id), 
+     { type: 'doughnut',
+      data: { labels: ['ข้อถูก', 'ข้อผิด'],
+              datasets: [ 
+                { data: [score, total - score], backgroundColor: ['#4a7c59', '#a33b3b'] } ] },
+    options: { plugins: { legend: { position: 'bottom' } } } });
+  }
+    drawPie('chart-r1', scoreR1);
 }
 
 </script>
