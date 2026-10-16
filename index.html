@@ -282,7 +282,7 @@ function render(p){
 
   function drawPie(id, score, total = 30) 
   { new Chart(document.getElementById(id), 
-     { type: 'doughnut',
+     { type: 'pie',
       data: { labels: ['ข้อถูก', 'ข้อผิด'],
               datasets: [ 
                 { data: [score, total - score], backgroundColor: ['#4a7c59', '#a33b3b'] } ] },
