@@ -34,10 +34,10 @@ input:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--gold);o
 /* ===== หน้าผลลัพธ์  ===== */
 #result{
   --w:min(92vw,560px);
-  background: url(resultbg.png) center / contain no-repeat fixed;
+  background: url(resultbg.png) center / cover no-repeat fixed;
+  position: relative;
   color: #9a4c32;
   min-height:100vh;
-  padding:16px 0;
   container-type:inline-size;
 }
 #result main{
