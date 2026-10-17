@@ -311,7 +311,7 @@ function render(p){
   const val = x => has(x) ? esc(x) : `<span class="none">ไม่พบข้อมูล</span>`;
   renderRounds(p);
   show("result");
-  drawPie('chart-r1', Number(p[COL.total.score]));
+  drawPie('chart-r1', Number(p[COL.rounds[0].total.score]));
 }
 
 
