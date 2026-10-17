@@ -248,6 +248,19 @@ function cell(row, key) {
   return esc(String(isNaN(n) ? v : Math.round(n * 100) / 100));
 }
 
+  function drawPie(id, score, total = 30) 
+  { const ctx = document.getElementById(id);
+   if (!ctx) return;
+   if (ctx._chart) ctx._chart.destroy();
+   ctx._chart = new Chart(ctx,
+     { type: 'pie',
+      data: { labels: ['ข้อถูก', 'ข้อผิด'],
+              datasets: [ 
+                { data: [score, total - score], backgroundColor: ['#4a7c59', '#a33b3b'] } ] },
+    options: { plugins: { legend: { position: 'bottom' } } } }); 
+    drawPie('chart-r1', Number(p[COL.total.score])); }
+
+
 function roundsToShow(row) {
   const s = (row[COL.status] ?? "").toString()
     .replace(/[๐-๙]/g, d => "๐๑๒๓๔๕๖๗๘๙".indexOf(d));
@@ -281,17 +294,6 @@ function render(p){
   renderRounds(p);
   show("result"); }
 
-  function drawPie(id, score, total = 30) 
-  { const ctx = document.getElementById(id);
-   if (!ctx) return;
-   if (ctx._chart) ctx._chart.destroy();
-   ctx._chart = new Chart(ctx,
-     { type: 'pie',
-      data: { labels: ['ข้อถูก', 'ข้อผิด'],
-              datasets: [ 
-                { data: [score, total - score], backgroundColor: ['#4a7c59', '#a33b3b'] } ] },
-    options: { plugins: { legend: { position: 'bottom' } } } }); 
-    drawPie('chart-r1', Number(p[COL.total.score])); }
 
 </script>
 </body>
