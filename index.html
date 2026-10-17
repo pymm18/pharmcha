@@ -254,7 +254,6 @@ function drawPie(id, score, total = 30) {
     } 
    }); 
 }
-    drawPie('chart-r1', Number(p[COL.total.score]));
   
 function show(view){
   $("intro").classList.toggle("hidden", view !== "intro");
@@ -311,7 +310,9 @@ function render(p){
   $("who").innerHTML = "ชื่อ: " + esc(p[COL.user]) + "<br>รหัส: " + esc(p[COL.id]);
   const val = x => has(x) ? esc(x) : `<span class="none">ไม่พบข้อมูล</span>`;
   renderRounds(p);
-  show("result"); }
+  show("result");
+  drawPie('chart-r1', Number(p[COL.total.score]));
+}
 
 
 </script>
