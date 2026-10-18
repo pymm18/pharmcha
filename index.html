@@ -102,6 +102,10 @@ h2{
   flex: 1;
   min-width: 0;
 }
+.chart-cell {
+  position: relative;
+  min-width: 0;
+}
 </style>
 </head>
 <body class="intro">
@@ -119,7 +123,7 @@ h2{
 
 <!-- หน้าผลลัพธ์ -->
 <section id="result" class="hidden">
-    <main>
+  <main>
     <div class="scroller" ></div>
       <div id="status" class="status"></div>
        <p id="who" class="who"></p>
@@ -128,11 +132,11 @@ h2{
       <div id="rounds"></div>
 
     <div class="chart-container">
-       <div canvas id="chart-r1"></canvas> </div>
-       <divcanvas id="chart-r2"></canvas> </div>
-       <div canvas id="chart-r3"></canvas> </div>
-       <div canvas id="chart-final"></canvas> </div>
-      </div>
+    <div class="chart-cell"><canvas id="chart-r1"></canvas></div>
+    <div class="chart-cell"><canvas id="chart-r2"></canvas></div>
+    <div class="chart-cell"><canvas id="chart-r3"></canvas></div>
+    <div class="chart-cell"><canvas id="chart-final"></canvas></div>
+    </div>
     </div>
   </main>
 </section>
