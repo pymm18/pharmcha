@@ -176,7 +176,7 @@ const COL = {
         { name: "ชีวะ", score: "Score R1 bio"},
         { name: "ฟิสิกส์", score: "Score R1 phy" }
       ],
-      total: { score: "Score R1", pct: "Percentile R1" }
+      total: { score: "Score R1" , pct: "Percentile R1" }
     },
     { title: "paper based",
       subjects: [
@@ -331,12 +331,12 @@ function renderRounds(row) {
   $("rounds").innerHTML = list.map(r => `
     <h2>${r.title}</h2>
     <table class="score">
-      <thead><tr><th>วิชา</th><th>คะแนน</th><th>เปอร์เซนไทล์</th></tr></thead>
+      <thead><tr><th>วิชา</th><th>คะแนน</th></tr></thead>
       <tbody>
         ${r.subjects.map(s => `
-          <tr><td>${s.name}</td><td>${cell(row, s.score)}</td><td>${cell(row, s.pct)}</td></tr>`).join("")}
+          <tr><td>${s.name}</td><td>${cell(row, s.score)}</td></tr>`).join("")}
       </tbody>
-      ${r.total ? `<tfoot><tr><td>รวม</td><td>${cell(row, r.total.score)}</td><td>${cell(row, r.total.pct)}</td></tr></tfoot>` : ""}
+      ${r.total ? `<tfoot><tr><td>รวม</td><td>${cell(row, r.total.score)}</td></tr><tr><td>เปอร์เซนไทล์รวม</td><td>${cell(row, r.total.pct)}</td></tr></tfoot>` : ""}
     </table>`).join("");
 }
 
