@@ -106,6 +106,17 @@ h2{
   position: relative;
   min-width: 0;
 }
+.round-block {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.round-block canvas {
+  width: 30%;
+}
+.chart-container {
+  display: none;
+}
 </style>
 </head>
 <body class="intro">
@@ -128,7 +139,6 @@ h2{
       <div id="status" class="status"></div>
        <p id="who" class="who"></p>
 
-    <div class="result-layout"> 
       <div id="rounds"></div>
 
     <div class="chart-container">
@@ -332,6 +342,13 @@ function render(p){
   const val = x => has(x) ? esc(x) : `<span class="none">ไม่พบข้อมูล</span>`;
   renderRounds(p);
   show("result");
+  const chartIds = ['chart-r1', 'chart-r2', 'chart-r3', 'chart-final'];
+document.querySelectorAll('#rounds .score').forEach((table, i) => {
+  const block = document.createElement('div');
+  block.className = 'round-block';
+  table.replaceWith(block);
+  block.append(table, $(chartIds[i]));
+});
   drawPie('chart-r1', Number(p[COL.rounds[0].total.score]));
   drawPie('chart-r2', Number(p[COL.rounds[1].total.score]));
   drawPie('chart-r3', Number(p[COL.rounds[2].total.score]));
