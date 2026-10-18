@@ -111,8 +111,15 @@ h2{
   align-items: center;
   gap: 16px;
 }
-.round-block canvas {
-  width: 10%;
+.round-block {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.chart-cell {
+  width: 200px;   /* ปรับขนาดกราฟที่เลขนี้ */
+  flex-shrink: 0;
+  position: relative;
 }
 .chart-container {
   display: none;
@@ -347,7 +354,12 @@ document.querySelectorAll('#rounds .score').forEach((table, i) => {
   const block = document.createElement('div');
   block.className = 'round-block';
   table.replaceWith(block);
-  block.append(table, $(chartIds[i]));
+
+  const cell = document.createElement('div');
+  cell.className = 'chart-cell';
+  cell.append($(chartIds[i]));
+
+  block.append(table, cell);
 });
   drawPie('chart-r1', Number(p[COL.rounds[0].total.score]));
   drawPie('chart-r2', Number(p[COL.rounds[1].total.score]));
