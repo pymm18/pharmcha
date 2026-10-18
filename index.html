@@ -47,6 +47,12 @@ input:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--gold);o
   position: relative;
   text-align: center;
 }
+main.scroller {
+  --scrollbar-width: auto;
+  border: none;
+  width: 80cqw;
+}
+
 .status{
   margin: 0 0 calc(var(--w)*.02) ;
   font-size: calc(var(--w)*.045);
@@ -71,9 +77,8 @@ h2{
   
 .score{
   width:100%;
-  margin:0 auto
-  font-size:calc(var(--w)*.034);
-  table-layout:fixed;
+  margin:0 auto;
+  font-size: calc(var(--w)*.034);
 }
   
 .score th,
@@ -106,13 +111,15 @@ h2{
 <!-- หน้าผลลัพธ์ -->
 <section id="result" class="hidden">
   <main>
-    <div id="status" class="status"></div>
-    <p id="who" class="who"></p>
-    <div id="rounds"></div>
-    <div style="max-width:180px;margin:24px auto 0;">
-      <canvas id="chart-r1"></canvas>
-    </div>
-
+    <div class="scroller" ></div>
+     <div id="status" class="status"></div>
+      <p id="who" class="who"></p>
+     <div id="rounds"></div>
+     <div style="max-width:180px;margin:24px auto 0;">
+      <canvas id="chart-r1"></canvas> </div>
+      <canvas id="chart-r2"></canvas>
+      <canvas id="chart-r3"></canvas>
+      <canvas id="chart-final"></canvas>
   </main>
 </section>
 
@@ -128,38 +135,34 @@ const COL = {
   user: "Name",
   status: "Status",
   rounds: [
-    {
-      title: "รอบ 1",
+    { title: "screening",
       subjects: [
-        { name: "เคมี", score: "Score R1 chem", pct: "Percentile R1 chem" },
-        { name: "ชีวะ", score: "Score R1 bio", pct: "Percentile R1 bio" },
-        { name: "ฟิสิกส์", score: "Score R1 phy", pct: "Percentile R1 phy" }
+        { name: "เคมี", score: "Score R1 chem" },
+        { name: "ชีวะ", score: "Score R1 bio"},
+        { name: "ฟิสิกส์", score: "Score R1 phy" }
       ],
       total: { score: "Score R1", pct: "Percentile R1" }
     },
-    {
-      title: "รอบ 2",
+    { title: "paper based",
       subjects: [
-        { name: "เคมี", score: "Score R2 chem", pct: "Percentile R2 chem" },
-        { name: "ชีวะ", score: "Score R2 bio", pct: "Percentile R2 bio" },
-        { name: "ฟิสิกส์", score: "Score R2 phy", pct: "Percentile R2 phy" }
+        { name: "เคมี", score: "Score R2 chem" },
+        { name: "ชีวะ", score: "Score R2 bio" },
+        { name: "ฟิสิกส์", score: "Score R2 phy"}
       ],
       total: { score: "Score R2", pct: "Percentile R2" }
     },
-    {
-      title: "รอบ 3",
+    { title: "semi-final",
       subjects: [
-        { name: "เคมี", score: "Score R3 chem", pct: "Percentile R3 chem" },
-        { name: "ชีวะ", score: "Score R3 bio", pct: "Percentile R3 bio" },
-        { name: "ฟิสิกส์", score: "Score R3 phy", pct: "Percentile R3 phy" }
+        { name: "เคมี", score: "Score R3 chem" },
+        { name: "ชีวะ", score: "Score R3 bio"},
+        { name: "ฟิสิกส์", score: "Score R3 phy" }
       ],
       total: { score: "Score R3", pct: "Percentile R3" }
     },
-    {
-      title: "Lab",
+    { title: "final",
       subjects: [
-        { name: "Lab 1", score: "Score Lab 1", pct: "Percentile Lab 1" },
-        { name: "Lab 2", score: "Score Lab 2", pct: "Percentile Lab 2" }
+        { name: "Lab 1", score: "Score Lab 1" },
+        { name: "Lab 2", score: "Score Lab 2" }
       ]
     }
   ]
@@ -224,7 +227,7 @@ function bindForm(){
 }
 
 /* ---------- ตรวจสอบและแสดงผล ---------- */
-let myPieChart = null;
+const PieChart = {};
   
 function drawPie(id, score, total = 30) { 
   const canvas = document.getElementById(id);
@@ -232,20 +235,19 @@ function drawPie(id, score, total = 30) {
   
   const ctx = canvas.getContext('2d');
   
-   if (myPieChart)  {
-     myPieChart.destroy();
-   }
-  
-   myPieChart = new Chart(ctx, { 
+   if (PieChart[id]) {
+     PieChart[id].destroy(); }
+     PieChart[id] = new Chart(ctx, { 
      type: 'pie',
       data: { 
-        labels: ['ข้อถูก', 'ข้อผิด'],
+        labels: ['จำนวนข้อถูก', 'จำนวนข้อผิด'],
               datasets: [{ 
                 data: [score, total - score], 
                 backgroundColor: ['#4a7c59', '#a33b3b'] 
               }] 
       },
     options: {  
+      responsive: true,
       plugins: { 
         legend: { 
           position: 'bottom' 
@@ -312,6 +314,9 @@ function render(p){
   renderRounds(p);
   show("result");
   drawPie('chart-r1', Number(p[COL.rounds[0].total.score]));
+  drawPie('chart-r2', Number(p[COL.rounds[1].total.score]));
+  drawPie('chart-r3', Number(p[COL.rounds[2].total.score]));
+  drawPie('chart-final', Number(p[COL.rounds[3].total.score]));
 }
 
 
