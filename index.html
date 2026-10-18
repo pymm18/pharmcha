@@ -42,11 +42,13 @@ input:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--gold);o
 }
 #result main{
   width: 60cqw;
-  margin: 0 auto;
+  margin-left: 20cqw;
   padding: 3cqw 0 0;
   position: relative;
-  text-align: center;
+  text-align: left;
+  gap: 1.5cqw;
 }
+
 main.scroller {
   --scrollbar-width: auto;
   border: none;
@@ -76,23 +78,27 @@ h2{
 }
   
 .score{
-  width:100%;
+  width:50%;
   margin:0 auto;
   font-size: calc(var(--w)*.034);
 }
   
 .score th,
 .score td{
-  
   border-bottom:1px solid rgba(154,76,50,.45);
   text-align:center;
   width: 28%
 }
 
-
 .score th{font-weight:600;border-bottom:2px solid #9a4c32}
 .score tfoot td{font-weight:700;border-top:2px solid #9a4c32;border-bottom:0}
 .none{color:#888}
+.chart-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(var(--w)*.02);
+  width: 50%;
+}
 </style>
 </head>
 <body class="intro">
@@ -115,7 +121,7 @@ h2{
      <div id="status" class="status"></div>
       <p id="who" class="who"></p>
      <div id="rounds"></div>
-     <div style="max-width:180px;margin:24px auto 0;">
+     <div class="chart-container">
       <canvas id="chart-r1"></canvas> </div>
       <canvas id="chart-r2"></canvas>
       <canvas id="chart-r3"></canvas>
@@ -163,7 +169,8 @@ const COL = {
       subjects: [
         { name: "Lab 1", score: "Score Lab 1" },
         { name: "Lab 2", score: "Score Lab 2" }
-      ]
+      ],
+       total: { score: "Score Lab", pct: "Percentile Lab" }
     }
   ]
 }
